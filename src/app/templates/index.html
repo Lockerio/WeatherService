@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <link rel="stylesheet" href="{{ url_for('site_routes_blueprint.static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Weather Forecast</h1>
+    <h1>Weather Forecast</h1>
+    <form id="locationForm">
+        <label for="location">Enter location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <div id="pressure"></div>
+    <div id="visibility"></div>
+    <div id="windSpeed"></div>
+    <div id="windDirection"></div>
+    <div id="humidity"></div>
+    <div id="apparentTemperature"></div>
+    <div id="precipitationProbability"></div>
+    <div id="precipitation"></div>
+    <div id="cloudCover"></div>
+    <div id="weatherDetails"></div>
+
+    <canvas id="temperatureChart" width="400" height="200"></canvas>
+
+    <script src="{{ url_for('site_routes_blueprint.static', filename='js/chart.js') }}"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ from app.routes.site_routes import site_routes_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(site_routes_blueprint)
-app.register_blueprint(api_routes_blueprint)
+app.register_blueprint(api_routes_blueprint, url_prefix='/api')
 
 
 if __name__ == '__main__':
