@@ -18,12 +18,10 @@ class CitySearchDAO:
         city = CitySearch(**data)
         self.session.add(city)
         self.session.commit()
-        return city
 
     def update(self, city):
         self.session.add(city)
         self.session.commit()
-        return city
 
     def delete(self, city_id):
         city = self.get_one(city_id)

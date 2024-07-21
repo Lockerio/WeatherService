@@ -4,6 +4,7 @@ import requests
 from flask import Blueprint, jsonify, Response, request
 from icecream import ic
 
+from app.database.container import city_search_service
 from app.geocoder import Geocoder
 from app.utils.data_preparer import DataPreparer
 
@@ -15,9 +16,12 @@ def weather():
     location = ic(request.form.get('location'))
     if location:
         try:
-            latitude, longitude = Geocoder.get_coordinates_by_city_name(location)
+            # Если кончились запросы к геокодеру, можно указать здесь геоточки для проверки сервиса
+            # latitude, longitude = Geocoder.get_coordinates_by_city_name(location)
+            latitude, longitude = 50, 70
+
             if latitude and longitude:
-                pass
+                city_search_service.update({"city_name": location})
             forecast = DataPreparer.prepare_forecast_data(latitude, longitude)
             return jsonify(forecast)
         except Exception as e:
