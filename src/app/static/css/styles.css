@@ -11,6 +11,10 @@ form {
     margin-bottom: 20px;
 }
 
+#attention {
+    text-align: center;
+}
+
 #currentWeather {
     text-align: center;
     margin-bottom: 20px;

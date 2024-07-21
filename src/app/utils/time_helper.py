@@ -1,13 +1,14 @@
 from datetime import datetime, timedelta, timezone
 
+from icecream import ic
+
 
 class TimeHelper:
     @staticmethod
-    def get_local_time(offset_str: str):
+    def get_local_time(offset_seconds: int) -> str:
         gmt_time = datetime.now(timezone.utc)
-        offset_hours = int(offset_str)
-        offset = timedelta(hours=offset_hours)
-
+        offset = timedelta(seconds=offset_seconds)
         local_time = gmt_time + offset
-        formatted_time = local_time.strftime('%Y-%m-%dT%H:%M')
+        rounded_local_time = local_time.replace(minute=0, second=0, microsecond=0)
+        formatted_time = rounded_local_time.strftime('%Y-%m-%dT%H:%M')
         return formatted_time
