@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Прогноз погоды</title>
     <link rel="stylesheet" href="{{ url_for('site_routes_blueprint.static', filename='css/styles.css') }}">
+
+    <!-- Подключение jQuery и jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
     <h1>Прогноз погоды</h1>
@@ -28,9 +33,13 @@
 
     <canvas id="temperatureChart" width="1000" height="300"></canvas>
 
+    <!-- Подключение Chart.js и других необходимых скриптов -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <!-- Подключение пользовательских скриптов -->
+    <script src="{{ url_for('site_routes_blueprint.static', filename='js/autocomplete.js') }}"></script>
     <script src="{{ url_for('site_routes_blueprint.static', filename='js/weather.js') }}"></script>
 </body>
 </html>

@@ -1,15 +1,12 @@
 from icecream import ic
 
-from app.geocoder import Geocoder
 from app.openmeteo_parser import OpenmeteoParser
 from app.utils.time_helper import TimeHelper
 
 
 class DataPreparer:
     @staticmethod
-    def prepare_forecast_data(location: str, period: int = 12):
-        latitude, longitude = Geocoder.get_coordinates_by_city_name(location)
-        ic(latitude, longitude)
+    def prepare_forecast_data(latitude: float, longitude: float, period: int = 12):
         data = ic(OpenmeteoParser.get_weather_json(latitude, longitude))
         local_time = TimeHelper.get_local_time(data["utc_offset_seconds"])
         current_time_index = data["hourly"]["time"].index(local_time)
