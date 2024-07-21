@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let chartInstance;
+
     document.getElementById('locationForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const location = document.getElementById('location').value;
@@ -33,7 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const temperatures = temperatureByHours.map(item => item.temperature);
 
             const ctx = document.getElementById('temperatureChart').getContext('2d');
-            new Chart(ctx, {
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -56,6 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             formatter: function(value, context) {
                                 return value + '°C';
                             }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 40,
+                            bottom: 40
                         }
                     },
                     scales: {
