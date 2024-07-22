@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const currentValues = data.current_values;
             document.getElementById('humidity').textContent = `Влажность: ${currentValues.relative_humidity}%`;
+            document.getElementById('currentTemperature').textContent = `Температура: ${currentValues.current_temperature}°C`;
             document.getElementById('apparentTemperature').textContent = `Ощущаемая температура: ${currentValues.apparent_temperature}°C`;
             document.getElementById('precipitationProbability').textContent = `Вероятность осадков: ${currentValues.precipitation_probability}%`;
             document.getElementById('precipitation').textContent = `Осадки: ${currentValues.precipitation} mm`;

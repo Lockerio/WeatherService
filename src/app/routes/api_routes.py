@@ -33,7 +33,7 @@ def get_cities():
 
 @api_routes_blueprint.route('/weather', methods=['POST'])
 def weather():
-    location = ic(request.form.get('location'))
+    location = request.form.get('location')
     if location:
         try:
             # Если кончились запросы к геокодеру, можно указать здесь геоточки для проверки сервиса

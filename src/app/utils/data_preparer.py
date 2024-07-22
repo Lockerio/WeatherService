@@ -7,13 +7,14 @@ from app.utils.time_helper import TimeHelper
 class DataPreparer:
     @staticmethod
     def prepare_forecast_data(latitude: float, longitude: float, period: int = 12):
-        data = ic(OpenmeteoParser.get_weather_json(latitude, longitude))
+        data = OpenmeteoParser.get_weather_json(latitude, longitude)
         local_time = TimeHelper.get_local_time(data["utc_offset_seconds"])
         current_time_index = data["hourly"]["time"].index(local_time)
 
         current_values = {
             "relative_humidity": data["hourly"]["relative_humidity_2m"][current_time_index],
             "apparent_temperature": data["hourly"]["apparent_temperature"][current_time_index],
+            "current_temperature": data["hourly"]["temperature_2m"][current_time_index],
             "precipitation_probability": data["hourly"]["precipitation_probability"][current_time_index],
             "precipitation": data["hourly"]["precipitation"][current_time_index],
             "surface_pressure": data["hourly"]["surface_pressure"][current_time_index],
