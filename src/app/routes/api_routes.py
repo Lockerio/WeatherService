@@ -6,9 +6,17 @@ from icecream import ic
 
 from app.database.container import city_search_service
 from app.geocoder import Geocoder
+from app.parsers.geonames_parser import GeonamesParser
 from app.utils.data_preparer import DataPreparer
 
 api_routes_blueprint = Blueprint('api_routes_blueprint', __name__)
+
+
+@api_routes_blueprint.route('/search_cities', methods=['GET'])
+def search_cities():
+    data = GeonamesParser.get_cities_names_json(request)
+    cities = [item['name'] for item in data.get('geonames', [])]
+    return jsonify(cities)
 
 
 @api_routes_blueprint.route('/cities_searches', methods=['GET'])
@@ -36,9 +44,9 @@ def weather():
     location = request.form.get('location')
     if location:
         try:
+            latitude, longitude = Geocoder.get_coordinates_by_city_name(location)
             # Если кончились запросы к геокодеру, можно указать здесь геоточки для проверки сервиса
-            # latitude, longitude = Geocoder.get_coordinates_by_city_name(location)
-            latitude, longitude = 50, 70
+            # latitude, longitude = 50, 70
 
             if latitude and longitude:
                 city_search_service.update({"city_name": location})
@@ -49,9 +57,7 @@ def weather():
                 forecast = DataPreparer.prepare_forecast_data(latitude, longitude)
                 response.data = jsonify(forecast).data
                 return response
-
-            forecast = DataPreparer.prepare_forecast_data(latitude, longitude)
-            return jsonify(forecast)
+            return jsonify({'error': "Could not find location"})
         except Exception as e:
             traceback.print_exc()
             return jsonify({'error': e})

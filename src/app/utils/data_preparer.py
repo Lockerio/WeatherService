@@ -1,6 +1,4 @@
-from icecream import ic
-
-from app.openmeteo_parser import OpenmeteoParser
+from app.parsers.openmeteo_parser import OpenmeteoParser
 from app.utils.time_helper import TimeHelper
 
 

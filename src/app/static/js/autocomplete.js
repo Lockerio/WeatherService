@@ -1,11 +1,8 @@
-// autocomplete.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Автозаполнение с использованием jQuery UI
+$(document).ready(function() {
     $("#location").autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "/api/city_suggestions",
-                type: "GET",
+                url: "/api/search_cities",
                 dataType: "json",
                 data: {
                     term: request.term
@@ -17,9 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         minLength: 2,
         select: function(event, ui) {
-            // Действия при выборе города из списка автозаполнения
-            $("#location").val(ui.item.label);
-            return false;
+            $("#location").val(ui.item.value);
         }
     });
 });
