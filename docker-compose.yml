@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    container_name: weather_app
+    environment:
+      - DB_URL=postgresql://user:password@postgre_db:5432/WeatherDB
+    command: tail -f /dev/null
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    container_name: postgre_db
+    volumes:
+      - ./pg_db:/var/lib/postgresql/data/
+    ports:
+      - 5405:5433
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password 
+      - POSTGRES_DB=WeatherDB
