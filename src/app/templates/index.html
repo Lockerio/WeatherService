@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Прогноз погоды</title>
     <link rel="stylesheet" href="{{ url_for('site_routes_blueprint.static', filename='css/styles.css') }}">
-
-    <!-- Подключение jQuery и jQuery UI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -16,8 +14,13 @@
     <form id="locationForm">
         <label for="location">Введите город:</label>
         <input type="text" id="location" name="location" required>
-        <button type="submit">Get Weather</button>
+        <button type="submit">Получить прогноз погоды</button>
     </form>
+
+    <div id="cityList">
+        <h2>Сохраненные города:</h2>
+        <ul id="cities"></ul>
+    </div>
 
     <div id="currentWeather">
         <div id="humidity"></div>
@@ -33,13 +36,12 @@
 
     <canvas id="temperatureChart" width="1000" height="300"></canvas>
 
-    <!-- Подключение Chart.js и других необходимых скриптов -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-    <!-- Подключение пользовательских скриптов -->
     <script src="{{ url_for('site_routes_blueprint.static', filename='js/autocomplete.js') }}"></script>
     <script src="{{ url_for('site_routes_blueprint.static', filename='js/weather.js') }}"></script>
+    <script src="{{ url_for('site_routes_blueprint.static', filename='js/cities_from_cookie.js') }}"></script>
 </body>
 </html>
