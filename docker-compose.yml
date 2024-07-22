@@ -5,7 +5,7 @@ services:
     build: .
     container_name: weather_app
     environment:
-      - DB_URL=postgresql://user:password@postgre_db:5433/WeatherDB
+      - DB_URL=postgresql://user:password@postgre_db:5432/WeatherDB
       - GEONAMES_USERNAME=!!!Имя пользователя!!!
     command: tail -f /dev/null
     ports:
@@ -18,7 +18,7 @@ services:
     volumes:
       - ./pg_db:/var/lib/postgresql/data/
     ports:
-      - 5405:5433
+      - 5405:5432
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password 
